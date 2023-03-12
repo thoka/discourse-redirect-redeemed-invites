@@ -10,8 +10,8 @@ module RedirectRedeemedInvites
   module InvitesControllerExtension
     private
     def show_invite(invite)
-      if invite.invited_users.exists?(user: current_user)
-        topic = invite.topics.first
+      topic = invite.topics.first
+      if topic.present? and invite.invited_users.exists?(user: current_user)
         redirect_to path(topic.relative_url)
       else
         super(invite)
